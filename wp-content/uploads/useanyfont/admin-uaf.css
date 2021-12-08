@@ -1,0 +1,11 @@
+				@font-face {
+					font-family: 'amsipro';
+					src: url('/PaginaToledo/wp-content/uploads/useanyfont/189AmsiPro.woff2') format('woff2'),
+						url('/PaginaToledo/wp-content/uploads/useanyfont/189AmsiPro.woff') format('woff');
+				}
+
+				.amsipro{font-family: 'amsipro' !important;}
+
+				.et_gf_amsipro{background:none !important;font-family:amsipro;text-indent:0 !important;font-size:25px;}
+
+		

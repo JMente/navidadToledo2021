@@ -1,0 +1,104 @@
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">
+/* customizable snowflake styling */
+.snowflake {
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial;
+    text-shadow: 0 0 1px #000;
+}
+
+@keyframes snowflakes-fall1 {
+    0% {
+        top: -10%;
+    }
+    100% {
+        top: 100%;
+    }
+}
+@keyframes snowflakes-shake1 {
+    0% {
+        transform: translateX(0px) rotate(0deg) scale(0.7);
+    }
+    50% {
+        transform: translateX(100px) rotate(-90deg) scale(1);
+    }
+    100% {
+        transform: translateX(0px) rotate(0deg) scale(0.7);
+    }
+}
+.snowflake1 {
+    position: fixed;
+    top: -50%;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    animation-name: snowflakes-fall1, snowflakes-shake1;
+    animation-duration: 14s, 4s;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    animation-play-state: running, running;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+}
+.snowflake1:nth-of-type(0) {
+    left: 1%;
+    -webkit-animation-delay: 0s, 0s;
+    animation-delay: 0s, 0s;
+    animation-duration: 10s, 2s;
+    width: 10%;
+}
+.snowflake1:nth-of-type(1) {
+    left: -10%;
+    -webkit-animation-delay: 0s, 0s;
+    animation-duration: 9s, 5s;
+    animation-delay: 0s, 0s;
+}
+.snowflake1:nth-of-type(2) {
+    left: 85%;
+    -webkit-animation-delay: 6s, 0s;
+    animation-duration: 15s, 7s;
+    animation-delay: 1s, 0s;
+}
+.snowflake1:nth-of-type(3) {
+    left: 80%;
+    -webkit-animation-delay: 5s, 0s;
+    animation-duration: 14s, 4s;
+    animation-delay: 5s, 0s;
+}
+.snowflake1:nth-of-type(4) {
+    left: 90%;
+    -webkit-animation-delay: 1s, 0s;
+    animation-duration: 10s, 4s;
+    animation-delay: 1s, 0s;
+}
+.snowflake1:nth-of-type(5) {
+    left: 65%;
+    -webkit-animation-delay: 8s, 3s;
+    animation-delay: 8s, 3s;
+}
+.snowflake1:nth-of-type(6) {
+    left: 70%;
+    -webkit-animation-delay: 6s, 2s;
+    animation-delay: 6s, 2s;
+}
+.snowflake1:nth-of-type(7) {
+    left: 75%;
+    -webkit-animation-delay: 2.5s, 1s;
+    animation-delay: 2.5s, 1s;
+}
+.snowflake1:nth-of-type(8) {
+    left: 80%;
+    -webkit-animation-delay: 1s, 0s;
+    animation-delay: 1s, 0s;
+}
+.snowflake1:nth-of-type(9) {
+    left: -5%;
+    -webkit-animation-delay: 3s, 0s;
+    animation-delay: 3s, 0s;
+}
+</style>
+<!-- end Simple Custom CSS and JS -->
