@@ -1,7 +1,7 @@
 				@font-face {
 					font-family: 'amsipro';
-					src: url('https://toledoalimentos.com/navidad/wp-content/uploads/useanyfont/189AmsiPro.woff2') format('woff2'),
-						url('https://toledoalimentos.com/navidad/wp-content/uploads/useanyfont/189AmsiPro.woff') format('woff');
+					src: url('/navidad/wp-content/uploads/useanyfont/189AmsiPro.woff2') format('woff2'),
+						url('/navidad/wp-content/uploads/useanyfont/189AmsiPro.woff') format('woff');
 				}
 
 				.amsipro{font-family: 'amsipro' !important;}

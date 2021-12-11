@@ -1,0 +1,324 @@
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"
+  type="text/javascript"
+></script>
+<script>
+  jQuery(document).ready(function ($) {
+    var correctCards = 0;
+    $(init);
+
+    function init() {
+      $("#loader-form").fadeOut(0);
+      // Hide the success message
+      $("#successMessage").hide();
+      $("#successMessage").css({
+        left: "580px",
+        top: "250px",
+        width: 0,
+        height: 0,
+      });
+
+      // Reset the game
+      correctCards = 0;
+      $("#cardPile").html("");
+      $("#cardSlots").html("");
+
+      // Create the pile of shuffled cards
+      //   var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+      var numbers = [1, 2, 3];
+      //   var terms = [
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/gallina_rellena-1.png" alt="Gallina rellena" width="100%">',
+      //       1,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/jamon_cubano-1.png" alt="Gallina rellena" width="100%">',
+      //       2,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/jamon_tipo_virginia-1.png" alt="Gallina rellena" width="100%">',
+      //       3,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_canadiense-1.png" alt="Gallina rellena" width="100%">',
+      //       4,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_pimiento-1.png" alt="Gallina rellena" width="100%">',
+      //       5,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_ahumada-1.png" alt="Gallina rellena" width="100%">',
+      //       6,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_horneada-1.png" alt="Gallina rellena" width="100%">',
+      //       7,
+      //     ],
+      //     [
+      //       '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pollo_relleno-1.png" alt="Gallina rellena" width="100%">',
+      //       8,
+      //     ],
+      //   ];
+      var terms = [
+        [
+          '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_canadiense-1.png" alt="Gallina rellena" width="100%">',
+          1,
+        ],
+        [
+          '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_horneada-1.png" alt="Gallina rellena" width="100%">',
+          2,
+        ],
+        [
+          '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pollo_relleno-1.png" alt="Gallina rellena" width="100%">',
+          3,
+        ],
+      ];
+      terms.sort(function () {
+        return Math.random() - 0.5;
+      });
+
+      for (var i = 0; i < terms.length; i++) {
+        $("<div>" + terms[i][0] + "</div>")
+          .data("number", terms[i][1])
+          .attr("id", "card" + terms[i][1])
+          .appendTo("#cardPile")
+          .draggable({
+            stack: "#cardPile div",
+            cursor: "move",
+            revert: true,
+          });
+      }
+
+      // Create the card slots
+      //   var words = [
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/gallina_rellena.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/jamon_cubano.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/jamon_tipo_virginia.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_canadiense.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_pimiento.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_ahumada.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_horneada.png" alt="Gallina rellena" width="100%">',
+      //     '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pollo_relleno.png" alt="Gallina rellena" width="100%">',
+      //   ];
+      var words = [
+        '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/lomo_canadiense.png" alt="Gallina rellena" width="100%">',
+        '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pierna_horneada.png" alt="Gallina rellena" width="100%">',
+        '<img src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/pollo_relleno.png" alt="Gallina rellena" width="100%">',
+      ];
+      for (var i = 1; i <= words.length; i++) {
+        $("<div>" + words[i - 1] + "</div>")
+          .data("number", i)
+          .appendTo("#cardSlots")
+          .droppable({
+            accept: "#cardPile div",
+            hoverClass: "hovered",
+            drop: handleCardDrop,
+          });
+      }
+      //ID DE IMPLEMENTACION
+      //AKfycbzVZfOEje1GvASwJ8cSsqkbaON_l5VDuOQh26QKrH0X5E1L24lAk0LTXjb-tdvsKL8v
+      //LINK
+      //https://script.google.com/macros/s/AKfycbzVZfOEje1GvASwJ8cSsqkbaON_l5VDuOQh26QKrH0X5E1L24lAk0LTXjb-tdvsKL8v/exec
+      $("#formulario_send_data").submit(function (e) {
+        $("#send-data-form").attr("disabled", true);
+        $("#loader-form").fadeIn();
+        e.preventDefault();
+        let nombre = $("#nombre").val();
+        let dpi = $("#dpi").val();
+        let telefono = $("#telefono").val();
+        let correo = $("#correo").val();
+        let departamento = $("#departamento").val();
+        let personas = $("#personas").val();
+        let urlData = `https://script.google.com/macros/s/AKfycbzVZfOEje1GvASwJ8cSsqkbaON_l5VDuOQh26QKrH0X5E1L24lAk0LTXjb-tdvsKL8v/exec?DPI=${dpi}&NOMBRE=${nombre}&TELEFONO=${telefono}&CORREO=${correo}&DEPARTAMENTO=${departamento}&PERSONAS=${personas}`;
+        console.log(urlData);
+
+        $.ajax({
+          url: urlData,
+          success: function (data) {
+            $("#loader-form").fadeOut();
+            $("#send-data-form").text("YA ESTAS PARTICIPANDO");
+            $("#send-data-form").addClass("success-data");
+            console.log(data);
+          },
+          error: function (data) {
+            $("#loader-form").fadeOut();
+            $("#send-data-form").text("ERROR");
+            $("#send-data-form").addClass("error-data");
+            console.log(data);
+          },
+        });
+      });
+    }
+
+    function handleCardDrop(event, ui) {
+      var slotNumber = $(this).data("number");
+      var cardNumber = ui.draggable.data("number");
+
+      // If the card was dropped to the correct slot,
+      // change the card colour, position it directly
+      // on top of the slot, and prevent it being dragged
+      // again
+
+      if (slotNumber == cardNumber) {
+        ui.draggable.addClass("correct");
+        ui.draggable.draggable("disable");
+        $(this).droppable("disable");
+        ui.draggable.position({ of: $(this), my: "left top", at: "left top" });
+        ui.draggable.draggable("option", "revert", false);
+        correctCards++;
+      }
+
+      // If all the cards have been placed correctly then display a message
+      // and reset the cards for another go
+
+      if (correctCards == 3) {
+        $("#successMessage").show();
+        $("#successMessage").animate({
+          left: "380px",
+          top: "200px",
+          width: "400px",
+          height: "100px",
+          opacity: 1,
+        });
+      }
+    }
+  });
+</script>
+a
+
+<div id="content">
+  <div id="containerimgtitulo">
+    <img
+      src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12/Titular-Juego.gif"
+      alt="Titulo"
+    />
+  </div>
+  <div class="instructions">
+    <p>
+      Mueve los productos Toledo hacía la silueta que corresponde, participa y
+      gana un KIT NAVIDEÑO TOLEDO
+    </p>
+  </div>
+  <div id="cardPile"></div>
+  <div id="cardSlots"></div>
+
+  <div id="successMessage">
+    <div class="row container-formulario w-100">
+      <div class="container-img-thanks">
+        <img
+          src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12//titulo2.png"
+          alt="Title2"
+          width="300px"
+        />
+      </div>
+      <form method="post" action="" id="formulario_send_data">
+        <div class="row w-100">
+          <div class="col">
+            <input
+              type="text"
+              name="nombre"
+              id="nombre"
+              class="inputToledo"
+              placeholder="Nombre"
+              required
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              name="dpi"
+              id="dpi"
+              class="inputToledo"
+              placeholder="DPI"
+              required
+            />
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="col">
+            <input
+              type="number"
+              name="telefono"
+              id="telefono"
+              placeholder="Teléfono"
+              class="inputToledo"
+              required
+            />
+          </div>
+          <div class="col">
+            <input
+              type="email"
+              name="correo"
+              id="correo"
+              class="inputToledo"
+              placeholder="Correo"
+              required
+            />
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="col">
+            <select
+              name="departamento"
+              id="departamento"
+              class="inputToledo"
+              required
+            >
+              <option value="Alta Verapaz">Alta Verapaz</option>
+              <option value="Baja Verapaz">Baja Verapaz</option>
+              <option value="Chimaltenago">Chimaltenago</option>
+              <option value="Chiquimula">Chiquimula</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="El Progreso">El Progreso</option>
+              <option value="Escuintla">Escuintla</option>
+              <option value="Huehuetenango">Huehuetenango</option>
+              <option value="Izabal">Izabal</option>
+              <option value="Jalapa">Jalapa</option>
+              <option value="Jutiapa">Jutiapa</option>
+              <option value="Petén">Petén</option>
+              <option value="Quetzaltenango">Quetzaltenango</option>
+              <option value="Quiché">Quiché</option>
+              <option value="Retalhuleu">Retalhuleu</option>
+              <option value="Sacatepequez">Sacatepequez</option>
+              <option value="San Marcos">San Marcos</option>
+              <option value="Santa Rosa">Santa Rosa</option>
+              <option value="Sololá">Sololá</option>
+              <option value="Suchitepequez">Suchitepequez</option>
+              <option value="Totonicapán">Totonicapán</option>
+              <option value="Zacapa">Zacapa</option>
+            </select>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              min="1"
+              name="personas"
+              id="personas"
+              class="inputToledo"
+              placeholder="¿Con cuántas personas compartes tu navidad?"
+              required
+            />
+          </div>
+        </div>
+        <div class="row w-100">
+          <img
+            src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12//cargando.gif"
+            id="loader-form"
+            alt="Cargando"
+            width="50px"
+          /><button type="submit" class="btn-submit" id="send-data-form">
+            ENVIAR DATOS
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- <button onclick="init()">Play Again</button> -->
+  </div>
+  <!-- <div id="containerdescription">
+    <img
+      src="https://toledoalimentos.com/navidad/wp-content/uploads/2021/12//description.png"
+      alt="Descripcion"
+    />
+  </div> -->
+</div>
